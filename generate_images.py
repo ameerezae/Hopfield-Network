@@ -3,6 +3,7 @@ import os
 import shutil
 import numpy as np
 import random
+import cv2
 
 original_images_path = './original/'
 noisy_images_path = './noisy/'
@@ -28,6 +29,19 @@ def generate_original_images():
             im = Image.Image()._new(arial_font.getmask(char))
             im.save(image_path + char + '.bmp')
 
+def add_noise(image, noise):
+    output = np.zeros(image.shape, np.uint8)
+    thres = 1 - noise
+    for i in range(image.shape[0]):
+        for j in range(image.shape[1]):
+            rdn = random.random()
+            if rdn < noise:
+                output[i][j] = 0
+            elif rdn > thres:
+                output[i][j] = 255
+            else:
+                output[i][j] = image[i][j]
+    return output
 
 def generate_noisy_images():
 
@@ -44,17 +58,10 @@ def generate_noisy_images():
             arial_font = ImageFont.truetype("arial.ttf", font)
             for char in "ABCDEFGHIJ":
                 im = Image.Image()._new(arial_font.getmask(char))
-
-                data = np.array(im)
-                for i in data:
-                    for j in range(len(i)):
-                        r = random.randint(1, 10) / 10
-                        if r <= error / 100:
-                            i[j] = 0
-                            rescaled = (255.0 / data.max() *
-                                        (data - data.min())).astype(np.uint8)
-                            im = Image.fromarray(rescaled)
-                            im.save(image_path + char + '.bmp')
+                im.save(image_path + char + '.bmp')
+                builded_image = cv2.imread(image_path + char + '.bmp')
+                noisy_image = add_noise(builded_image, error / 100)
+                cv2.imwrite(image_path + char + '.bmp', noisy_image)
 
 
 if __name__ == '__main__':
