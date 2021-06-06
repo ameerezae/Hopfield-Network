@@ -2,6 +2,7 @@ import os
 
 import numpy as np
 from PIL import Image
+import matplotlib.pyplot as plt
 
 errors = [10, 30, 60]
 fonts = [16, 32, 64]
@@ -47,7 +48,7 @@ def calculate_accuracies():
         accuracy[keyaccs] = round(np.average(accs), 2)
 
 
-if __name__ == '__main__':
+def evaluate():
     original_images_path = './original/'
     recovered_images_path = './recovered/'
     for font in fonts:
@@ -64,5 +65,32 @@ if __name__ == '__main__':
                 accuracies[str(error) + '_' + str(font)].append(acc)
 
     calculate_accuracies()
+
+def make_table():
+    table_data = []
+
+    for font in fonts:
+        table_data.append([str(font) + 'px', str(accuracy['10_' + str(font)]) + ' %',
+                           str(accuracy['30_' + str(font)]) + ' %',
+                           str(accuracy['60_' + str(font)]) + ' %'])
+
+    fig, ax = plt.subplots()
+    table = ax.table(cellText=table_data, cellLoc='center'
+                     , colLabels=['Font Size / Noise', '10%', '30%', '60%'])
+    table.set_fontsize(15)
+    table.scale(3, 3)
+    fig.canvas.draw()
+    bbox = table.get_window_extent(fig.canvas.get_renderer())
+    bbox = bbox.from_extents(bbox.xmin - 5, bbox.ymin - 5, bbox.xmax + 5, bbox.ymax + 5)
+    bbox_inches = bbox.transformed(fig.dpi_scale_trans.inverted())
+    ax.axis('off')
+    fig.savefig('error_table.png', bbox_inches=bbox_inches)
+    plt.show()
+
+
+
+if __name__ == '__main__':
+    evaluate()
     print(accuracy)
+    make_table()
 
