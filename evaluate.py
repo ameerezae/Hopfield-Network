@@ -84,7 +84,7 @@ def make_table():
     bbox = bbox.from_extents(bbox.xmin - 5, bbox.ymin - 5, bbox.xmax + 5, bbox.ymax + 5)
     bbox_inches = bbox.transformed(fig.dpi_scale_trans.inverted())
     ax.axis('off')
-    fig.savefig('error_table.png', bbox_inches=bbox_inches)
+    fig.savefig('accuracy_table.png', bbox_inches=bbox_inches)
     plt.show()
 
 

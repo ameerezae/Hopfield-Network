@@ -24,5 +24,11 @@ Install dependencies by running following command:
 3. To evaluate the recovered images in comparison with the original images, run the following command:
 \
    ```python evaluate.py```
+   
+### Result
+Here is final result and table of accuracy for recovering noisy images.
+\
+<img src="./accuracy_table.png" alt="pic">
+
 ### Authors
 Amir Rezaei [@ameerezae](https://github.com/ameerezae)
