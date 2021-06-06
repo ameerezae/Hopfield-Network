@@ -49,7 +49,7 @@ def calculate_accuracies():
 
 if __name__ == '__main__':
     original_images_path = './original/'
-    noisy_images_path = './noisy/'
+    recovered_images_path = './recovered/'
     for font in fonts:
         image_path = original_images_path + str(font) + '/'
 
@@ -58,9 +58,9 @@ if __name__ == '__main__':
             original_image = image_path + image
             open_image = read_image_path(original_image)
             for error in errors:
-                noisy_image = noisy_images_path + str(error) + '/' + str(font) + '/' + image
-                open_noisy_image = read_image_path(noisy_image)
-                acc = 100 * (1 - np.average(np.abs(open_image - open_noisy_image)))
+                recovered_image = recovered_images_path + str(error) + '/' + str(font) + '/' + image
+                open_recovered_image = read_image_path(recovered_image)
+                acc = 100 * (1 - np.average(np.abs(open_image - open_recovered_image)))
                 accuracies[str(error) + '_' + str(font)].append(acc)
 
     calculate_accuracies()

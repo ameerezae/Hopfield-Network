@@ -43,7 +43,7 @@ class Hopfield:
         for error in errors:
             for font in fonts:
                 path = './noisy/' + str(error) + '/' + str(font) + '/'
-                result_path = 'results/' + str(error) + '/' + str(font) + '/'
+                result_path = 'recovered/' + str(error) + '/' + str(font) + '/'
                 if not os.path.exists(result_path):
                     os.makedirs(result_path)
                 else:
