@@ -4,12 +4,18 @@ import shutil
 import numpy as np
 import random
 import cv2
+import requests
 
 original_images_path = './original/'
 noisy_images_path = './noisy/'
 font_sizes = [16, 32, 64]
 errors = [10, 30, 60]
 
+
+def download_font():
+    if not os.path.exists('arial.ttf'):
+        r = requests.get('https://www.freebestfonts.com/yone//down/arial.ttf')
+        open('arial.ttf', 'wb').write(r.content)
 
 def generate_original_images():
     # Make directories
@@ -29,6 +35,7 @@ def generate_original_images():
             im = Image.Image()._new(arial_font.getmask(char))
             im.save(image_path + char + '.bmp')
 
+
 def add_noise(image, noise):
     output = np.zeros(image.shape, np.uint8)
     thres = 1 - noise
@@ -43,8 +50,8 @@ def add_noise(image, noise):
                 output[i][j] = image[i][j]
     return output
 
-def generate_noisy_images():
 
+def generate_noisy_images():
     if not os.path.exists(noisy_images_path):
         os.makedirs(noisy_images_path)
     else:
@@ -65,6 +72,6 @@ def generate_noisy_images():
 
 
 if __name__ == '__main__':
+    download_font()
     generate_original_images()
     generate_noisy_images()
-
