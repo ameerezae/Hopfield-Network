@@ -26,7 +26,17 @@ Install dependencies by running following command:
    ```python evaluate.py```
    
 ### Result
-Here is final result and table of accuracy for recovering noisy images.
+Sample of noisy image and recovered image of it:
+
+**Noisy image**
+
+<img src="./noisy/30/32/G.bmp" alt="G">
+
+**Recovered**
+
+<img src="./recovered/30/32/G.bmp" alt="G">
+
+table of accuracy for recovering noisy images.
 \
 <img src="./accuracy_table.png" alt="pic">
 
