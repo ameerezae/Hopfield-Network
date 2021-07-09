@@ -26,18 +26,18 @@ Install dependencies by running following command:
    ```python evaluate.py```
    
 ### Result
-Sample of noisy image and recovered image of it:
+Sample of noisy image and recovered image:
 
-**Noisy image**
+**Noisy image** with `30%` noise and `32px` font. 
 
-<img src="./noisy/30/32/G.bmp" alt="G">
+<img src="./noisy/30/32/G.bmp" width=250 alt="G">
 
 **Recovered**
 
-<img src="./recovered/30/32/G.bmp" alt="G">
+<img src="./recovered/30/32/G.bmp" width=250 alt="G">
 
-table of accuracy for recovering noisy images.
-\
+table of accuracy for recovering noisy images for all fonts and `10%`, `30%` and `60%` noise.
+
 <img src="./accuracy_table.png" alt="pic">
 
 ### Authors
